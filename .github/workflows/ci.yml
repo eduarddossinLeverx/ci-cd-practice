@@ -1,6 +1,5 @@
-name: Node.js CI/CD Pipeline # Pipeline name you'll see in GitHub
+name: Node.js CI/CD Pipeline
 
-# Triggers: when to run this pipeline
 on:
   push:
     branches: [ "main" ]
@@ -8,37 +7,35 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build-and-test: # Job name (task)
-    runs-on: ubuntu-latest # Which server to run on (free Ubuntu from GitHub)
+  build-and-test:
+    runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Get the code from the repository
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # Step 2: Install the required Node.js version
       - name: Set up Node.js 20
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'npm' # Caching to speed up future runs
+          cache: 'npm'
 
-      # Step 3: BUILD - Installing dependencies
       - name: Install dependencies
         run: npm ci
 
-      # Step 4: TEST (Part 1) - Linting (Quality Gate)
-      - name: Lint with ESLint
+      - name: Lint with ESLint (Quality Gate)
         run: npm run lint
 
-      # Step 5: TEST (Part 2) - Running tests and collecting coverage
       - name: Test with Jest
         run: npm run test:coverage
 
-      # Step 6: ARTIFACT - Saving the coverage report as a build artifact
-      - name: Upload coverage report
+      - name: Upload coverage report (Artifact)
         uses: actions/upload-artifact@v4
         with:
           name: coverage-report
           path: coverage/
-          retention-days: 5 # Keep the artifact for 5 days
+          retention-days: 5
+
+      # NEW: Docker Build Step
+      - name: Build Docker Image
+        run: docker build -t ci-cd-practice-app .
