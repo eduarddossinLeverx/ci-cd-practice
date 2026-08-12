@@ -1,14 +1,20 @@
 {
-  "name": "ci-cd-practice",
+  "name": "ci-cd-practice-sveta",
   "version": "1.0.0",
-  "description": "My first CI/CD pipeline",
+  "description": "My first CI/CD pipeline with Husky and Docker",
   "scripts": {
     "lint": "eslint src/ tests/",
     "test": "jest",
-    "test:coverage": "jest --coverage"
+    "test:coverage": "jest --coverage",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "*.{js,jsx}": "eslint --fix"
   },
   "devDependencies": {
     "eslint": "^8.50.0",
-    "jest": "^29.7.0"
+    "jest": "^29.7.0",
+    "husky": "^9.0.0",
+    "lint-staged": "^15.2.0"
   }
 }

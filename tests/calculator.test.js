@@ -14,4 +14,3 @@ describe('Calculator', () => {
     expect(() => divide(5, 0)).toThrow("Cannot divide by zero!");
   });
 });
-
