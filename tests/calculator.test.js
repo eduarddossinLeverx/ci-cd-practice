@@ -1,4 +1,4 @@
-const { add, divide } = require('../src/calculator');
+var { add, divide } = require('../src/calculator');
 
 describe('Calculator', () => {
   test('adds 2 + 3 to equal 5', () => {
