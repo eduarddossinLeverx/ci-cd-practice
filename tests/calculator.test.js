@@ -1,5 +1,5 @@
 const { add, divide } = require('../src/calculator');
-
+const unusedVariable = 10;
 describe('Calculator', () => {
   test('adds 2 + 3 to equal 5', () => {
     expect(add(2, 3)).toBe(5);
